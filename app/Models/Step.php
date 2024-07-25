@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Step extends Model
 {
+    protected $table = 'steps';
+
     public function plan(): BelongsTo {
         return $this->belongsTo(Plan::class);
     }

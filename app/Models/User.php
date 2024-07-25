@@ -14,6 +14,8 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
+    protected $table = 'users';
+
     public function plans(): HasMany {
         return $this->hasMany(Plan::class);
     }

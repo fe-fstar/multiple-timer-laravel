@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Models\Step;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Plan extends Model
 {
+    protected $table = 'plans';
+
     public $incrementing = false;
 
     protected $keyType = 'string';

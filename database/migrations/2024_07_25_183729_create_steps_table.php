@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('hours');
             $table->integer('minutes');
             $table->integer('seconds');
+            $table->string("title");
+            $table->text("description");
             $table->timestamps();
         });
     }
