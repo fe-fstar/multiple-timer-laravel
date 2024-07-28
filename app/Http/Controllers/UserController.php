@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    // update user
-    // delete user
-    // both need to be authenticated
+    // Update user
     public function update(Request $request) {
+        // Check if authenticated
         $user = auth()->user();
 
         $validator = Validator::make(request()->all(), [
@@ -41,7 +40,9 @@ class UserController extends Controller
         return response()->json(['message' => 'User updated successfully']);
     }
 
+    // Delete user
     public function delete(Request $request) {
+        // Check if authenticated
         $user = auth()->user();
     
         DB::transaction(function () use ($user) {

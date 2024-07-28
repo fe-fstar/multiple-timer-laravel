@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    // Register a user
     public function register() {
         $validator = Validator::make(request()->all(), [
             'username' => 'required',
@@ -46,11 +42,7 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    // Get a JWT via given credentials
     public function login()
     {
         $credentials = request(['username', 'password']);
@@ -62,21 +54,13 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    // Get the authenticated user
     public function verify()
     {
         return response()->json(auth()->user());
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    // Log out the user (invalidate the token)
     public function logout()
     {
         auth()->logout();
@@ -84,19 +68,13 @@ class AuthController extends Controller
         return response()->json(['message' => 'logoutSuccessful']);
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    // Get the token array structure.
     protected function respondWithToken($token)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth("api")->factory()->getTTL() * 60 * 24 * 7 // 7 Days
-        ]);
+        ], 200);
     }
 }

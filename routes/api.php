@@ -12,8 +12,7 @@ Route::group(['middleware' => JwtMiddleware::class, "prefix" => "step"], functio
 });
 
 Route::group(['middleware' => JwtMiddleware::class, "prefix" => "plan"], function() {
-    Route::get('user', [PlanController::class, "getWithUserId"]);
-    Route::get('{id}', [PlanController::class, "getWithPlanId"]);
+    Route::get('user/{username}', [PlanController::class, "getWithUsername"]);
     Route::post('create', [PlanController::class, "create"]);
     Route::put('update', [PlanController::class, "update"]);
     Route::delete('delete', [PlanController::class, 'delete']);
@@ -33,4 +32,8 @@ Route::group(['middleware' => JwtMiddleware::class, "prefix" => "user"], functio
 Route::group(["middleware"=>"api"], function() {
     Route::post('register', [AuthController::class, 'register'])->name('register');
     Route::post('login', [AuthController::class, 'login'])->name('login');
+});
+
+Route::group(["middleware"=>"api", "prefix" => "plan"], function() {
+    Route::get('{id}', [PlanController::class, "getWithPlanId"]);
 });
